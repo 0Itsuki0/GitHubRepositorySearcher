@@ -10,7 +10,13 @@
 import Foundation
 
 struct Response: Codable {
-    var total_count: Int
-    var incomplete_results: Bool
+    var totalCount: Int
+    var incompleteResults: Bool
     var items: [Repository]
+    
+    
+    private enum CodingKeys : String, CodingKey {
+        case totalCount = "total_count", incompleteResults = "incomplete_results", items
+    }
+        
 }

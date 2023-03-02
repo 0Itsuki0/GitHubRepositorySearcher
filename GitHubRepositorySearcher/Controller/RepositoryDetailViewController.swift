@@ -41,13 +41,13 @@ class RepositoryDetailViewController: UIViewController {
             avatarImageView.image = UIImage(systemName: "square.slash")
         }
         
-        repositoryNameLabel.text = repository.full_name
+        repositoryNameLabel.text = repository.fullName
         descriptionLabel.text = repository.description
         languageLabel.text = repository.language ?? "Not Specified"
-        openIssuesCountLabel.text = "\(repository.open_issues)"
-        watchersCountLabel.text = "\(repository.watchers_count)"
-        stargazersCountLabel.text = "\(repository.stargazers_count)"
-        forksCountLabel.text = "\(repository.forks)"
+        openIssuesCountLabel.text = "\(repository.openIssues ?? 0)"
+        watchersCountLabel.text = "\(repository.watchersCount ?? 0)"
+        stargazersCountLabel.text = "\(repository.stargazersCount ?? 0)"
+        forksCountLabel.text = "\(repository.forks ?? 0)"
 
     }
 
