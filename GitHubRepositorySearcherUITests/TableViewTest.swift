@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import GitHubRepositorySearcher
 
 final class TableViewTest: XCTestCase {
 

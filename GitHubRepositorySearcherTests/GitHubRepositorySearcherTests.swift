@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import SDWebImage
 @testable import GitHubRepositorySearcher
 
 
