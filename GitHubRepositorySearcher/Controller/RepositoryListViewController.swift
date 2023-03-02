@@ -36,7 +36,7 @@ class RepositoryListViewController: UIViewController {
 
 
     @IBAction func onSendButtonPressed(_ sender: UIButton) {
-        enterButtonPressed()
+        keywordEntered()
     }
     
     @IBAction func onTapGestureRecognized(_ sender: UITapGestureRecognizer) {
@@ -83,7 +83,7 @@ extension RepositoryListViewController: UISearchBarDelegate {
         }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        enterButtonPressed()
+        keywordEntered()
     }
     }
 
@@ -94,7 +94,7 @@ extension RepositoryListViewController: UISearchBarDelegate {
 extension RepositoryListViewController {
     
     // either enter button on the keyboard or the send button next the the search bar is pressed
-    private func enterButtonPressed() {
+    private func keywordEntered() {
         guard !(searchBar.text?.isEmpty ?? true)
         else {
             let alert = createAlert(title: "Please enter something!")

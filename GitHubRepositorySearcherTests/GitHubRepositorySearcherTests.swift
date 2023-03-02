@@ -6,7 +6,9 @@
 //
 
 import XCTest
+import SDWebImage
 @testable import GitHubRepositorySearcher
+
 
 final class GitHubRepositorySearcherTests: XCTestCase {
 

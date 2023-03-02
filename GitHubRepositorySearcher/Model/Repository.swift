@@ -61,6 +61,13 @@ struct Repository: Codable {
     
 }
 
+extension Repository: Equatable {
+    static func == (lhs: Repository, rhs: Repository) -> Bool {
+        return true
+    }
+}
+
+
 struct Owner: Codable {
     let id: Int
     let avatarURL: String?
