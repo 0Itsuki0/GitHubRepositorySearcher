@@ -30,7 +30,7 @@ class RepositoryDetailViewController: UIViewController {
     }
     
     // configure labels and images when view loads up
-    func configure() {
+    private func configure() {
         
         if let url = repository.avatarImageUrl {
             avatarImageView.sd_setImage(with: url, completed: nil)

@@ -10,9 +10,10 @@
 import Foundation
 
 struct Response: Codable {
-    var totalCount: Int
-    var incompleteResults: Bool
-    var items: [Repository]
+    
+    let totalCount: Int
+    let incompleteResults: Bool
+    let items: [Repository]
     
     
     private enum CodingKeys : String, CodingKey {
