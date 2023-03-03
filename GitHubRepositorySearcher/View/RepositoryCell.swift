@@ -19,6 +19,7 @@ class RepositoryCell: UITableViewCell {
     static let cellIdentifier = String(describing: RepositoryCell.self)
 
     
+    // configure cell before adding to table
     func configure() {
         repositoryNameLabel.text = repository.fullName
         descriptionLabel.text = repository.description

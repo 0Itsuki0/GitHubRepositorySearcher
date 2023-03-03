@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class TableViewTest: XCTestCase {
+final class TableViewTests: XCTestCase {
 
     var app: XCUIApplication!
     

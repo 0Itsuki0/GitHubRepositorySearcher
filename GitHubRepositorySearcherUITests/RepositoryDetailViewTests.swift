@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class RepositoryDetailViewTest: XCTestCase {
+final class RepositoryDetailViewTests: XCTestCase {
 
     var app: XCUIApplication!
     

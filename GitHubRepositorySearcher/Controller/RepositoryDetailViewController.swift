@@ -16,15 +16,11 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var repositoryNameLabel: UILabel!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    
     @IBOutlet weak var languageLabel: UILabel!
-    
     @IBOutlet weak var openIssuesCountLabel: UILabel!
     @IBOutlet weak var watchersCountLabel: UILabel!
-    
     @IBOutlet weak var stargazersCountLabel: UILabel!
     @IBOutlet weak var forksCountLabel: UILabel!
     
@@ -33,6 +29,7 @@ class RepositoryDetailViewController: UIViewController {
         configure()
     }
     
+    // configure labels and images when view loads up
     func configure() {
         
         if let url = repository.avatarImageUrl {

@@ -10,11 +10,10 @@ import Foundation
 
 class GitHubAPIService {
     
-    private static var task: URLSessionTask?
-
     enum ServiceError: Error, CustomStringConvertible {
         case urlCreation
         case network
+        case badRequest
         case parsing
         
         var description: String {
@@ -23,45 +22,56 @@ class GitHubAPIService {
                 return "Something wrong with keyword entered."
             case .network:
                 return "Network error: Please check on connection."
+            case .badRequest:
+                return "Invalid request."
             case .parsing:
                 return "Error parsing response."
             }
         }
     }
     
-
-    static func fetchRepository(for text: String, completionHandler: @escaping (Result<[Repository], ServiceError>) -> Void) {
-        if !text.isEmpty {
-
-            let urlString = "https://api.github.com/search/repositories?q=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-            guard let url = URL(string: urlString) else {
-                completionHandler(.failure(ServiceError.urlCreation))
-                return
-            }
-
-            let task = URLSession.shared.dataTask(with: url) { (data, res, err) in
-                if err != nil {
-                    completionHandler(.failure(ServiceError.network))
-                    return
-                }
-
-                guard let safeData = data else {return}
-                let decoder = JSONDecoder()
-                do {
-                    let decodedData = try decoder.decode(Response.self, from: safeData)
-                    completionHandler(.success(decodedData.items))
-
-                } catch  {
-                    completionHandler(.failure(ServiceError.parsing))
-                }
-            }
-            task.resume()
+    static func fetchRepository(for text: String) async throws -> [Repository] {
+        
+        guard let urlString = "https://api.github.com/search/repositories?q=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), let url = URL(string: urlString)  else {
+            throw ServiceError.urlCreation
         }
+        let result = await performRequest(for: url)
+        
+        switch result {
+        case .success(let items):
+            return items
+        case .failure(let error):
+            throw error as ServiceError
+        }
+        
     }
-
-        static func taskCancel() {
-            task?.cancel()
+    
+    
+    static private func performRequest(for url: URL) async -> (Result<[Repository], ServiceError>) {
+        
+        do {
+            let (data, urlResponse) = try await URLSession.shared.data(from: url, delegate: nil)
+            guard let httpStatus = urlResponse as? HTTPURLResponse,  httpStatus.statusCode == 200 else { return .failure(ServiceError.badRequest)}
+            return parseJSONData(data: data)
+        } catch {
+            return .failure(ServiceError.network)
         }
+        
+    }
+    
+    
+    static private func parseJSONData(data: Data) -> (Result<[Repository], ServiceError>) {
+        
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(Response.self, from: data)
+            return .success(decodedData.items)
+
+        } catch  {
+            return .failure(ServiceError.parsing)
+        }
+        
+    }
     
     
 }

@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class SearchBarTest: XCTestCase {
+final class SearchBarTests: XCTestCase {
 
     var app: XCUIApplication!
     
