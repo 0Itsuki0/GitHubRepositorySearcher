@@ -157,7 +157,8 @@ extension RepositoryListViewController {
     
     private func presentAlert(alert: UIAlertController) {
         if let visibleController = self.navigationController?.visibleViewController as? UIAlertController{
-            visibleController.dismiss(animated: false) {
+            visibleController.dismiss(animated: false) { [weak self] in
+                guard let self = self else {return}
                 self.present(alert, animated: true)
             }
         }
