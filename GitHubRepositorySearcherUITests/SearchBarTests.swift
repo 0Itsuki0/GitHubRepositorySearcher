@@ -12,6 +12,7 @@ final class SearchBarTests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUpWithError() throws {
+        
         try super.setUpWithError()
         continueAfterFailure = false
         app = XCUIApplication()
@@ -21,6 +22,7 @@ final class SearchBarTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        
         app.terminate()
         app = nil
         try super.tearDownWithError()
@@ -28,17 +30,21 @@ final class SearchBarTests: XCTestCase {
     
     
     func testSearchBarInteraction() {
+        
         let searchBar = app.otherElements["SearchBar"]
         XCTAssertTrue(searchBar.exists, "The searchBar exists.")
         searchBar.tap()
         searchBar.typeText("swift")
+        
     }
     
     
     func testSendButtonInteraction() {
+        
         let sendButton = app.buttons["SendButton"]
         XCTAssertTrue(sendButton.exists, "The send button exists.")
         sendButton.tap()
+        
     }
     
    

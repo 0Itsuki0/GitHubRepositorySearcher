@@ -13,15 +13,16 @@ final class AlertsTests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUpWithError() throws {
+        
         try super.setUpWithError()
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
         
-        
     }
     
     override func tearDownWithError() throws {
+        
         app.terminate()
         app = nil
         try super.tearDownWithError()
@@ -49,6 +50,7 @@ final class AlertsTests: XCTestCase {
     
     
     func testErrorAlert() {
+        
         let sendButton = app.buttons["SendButton"]
         sendButton.tap()
         

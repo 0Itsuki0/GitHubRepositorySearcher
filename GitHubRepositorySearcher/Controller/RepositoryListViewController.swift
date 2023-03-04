@@ -12,7 +12,7 @@ class RepositoryListViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    lazy var loader: UIAlertController = createLoader()
+    lazy private var loader: UIAlertController = createLoader()
     
     private var repositoryList = [Repository]()
 

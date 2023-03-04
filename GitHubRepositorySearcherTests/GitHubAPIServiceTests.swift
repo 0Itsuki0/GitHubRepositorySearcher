@@ -14,6 +14,7 @@ import OHHTTPStubsSwift
 final class GitHubAPIServiceTests: XCTestCase {
     
     func testFetchRepositoriesSuccess() async {
+        
       let expectation = XCTestExpectation(description: "Fetching data from server")
         stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
             return HTTPStubsResponse(
@@ -21,7 +22,7 @@ final class GitHubAPIServiceTests: XCTestCase {
                 statusCode: 200,
                 headers: nil
             )
-      }
+        }
         do {
             let repositoryList = try await GitHubAPIService.fetchRepository(for: "swift")
             XCTAssert((repositoryList as Any) is [Repository])
@@ -32,17 +33,19 @@ final class GitHubAPIServiceTests: XCTestCase {
         }
         expectation.fulfill()
         wait(for: [expectation], timeout: 5)
+        
     }
     
     
-    
     func testFetchRepositoriesBadRequest() async {
+        
         let expectation = XCTestExpectation(description: "Fetching data from server")
-          stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
-              return HTTPStubsResponse(
-                  fileAtPath: OHPathForFile("sampleResponseBadRequest.json", type(of: self))!,
-                  statusCode: 422,
-                  headers: nil)
+        stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
+            return HTTPStubsResponse(
+                fileAtPath: OHPathForFile("sampleResponseBadRequest.json", type(of: self))!,
+                statusCode: 422,
+                headers: nil
+            )
         }
         do {
             let repositoryList = try await GitHubAPIService.fetchRepository(for: "")
@@ -57,14 +60,16 @@ final class GitHubAPIServiceTests: XCTestCase {
 
     }
 
+    
     func testFetchRepositoriesNetworkError() async {
+        
         let expectation = XCTestExpectation(description: "Fetching data from server")
         stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
-          return HTTPStubsResponse(
-            fileAtPath: OHPathForFile("sampleResponse.json", type(of: self))!,
-            statusCode:200,
-            headers:nil
-          ).requestTime(200.0, responseTime: 5.0)
+            return HTTPStubsResponse(
+                fileAtPath: OHPathForFile("sampleResponse.json", type(of: self))!,
+                statusCode:200,
+                headers:nil
+            ).requestTime(200.0, responseTime: 5.0)
         }
         do {
             let repositoryList = try await GitHubAPIService.fetchRepository(for: "swift")
@@ -80,13 +85,16 @@ final class GitHubAPIServiceTests: XCTestCase {
 
     }
     
+    
     func testFetchRepositoriesParsingError() async {
+        
         let expectation = XCTestExpectation(description: "Fetching data from server")
-          stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
-              return HTTPStubsResponse(
-                  fileAtPath: OHPathForFile("sampleResponseParsingError.json", type(of: self))!,
-                  statusCode: 200,
-                  headers: nil)
+        stub(condition: isHost("api.github.com") && isPath("/search/repositories") ) { _ in
+            return HTTPStubsResponse(
+                fileAtPath: OHPathForFile("sampleResponseParsingError.json", type(of: self))!,
+                statusCode: 200,
+                headers: nil
+            )
         }
         do {
             let repositoryList = try await GitHubAPIService.fetchRepository(for: "Swift")

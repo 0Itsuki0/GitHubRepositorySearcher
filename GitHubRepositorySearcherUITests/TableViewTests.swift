@@ -12,18 +12,20 @@ final class TableViewTests: XCTestCase {
     var app: XCUIApplication!
     
     override func setUpWithError() throws {
+        
         try super.setUpWithError()
         continueAfterFailure = false
         app = XCUIApplication()
         app.launch()
         
-        
     }
     
     override func tearDownWithError() throws {
+        
         app.terminate()
         app = nil
         try super.tearDownWithError()
+        
     }
     
     
@@ -40,8 +42,6 @@ final class TableViewTests: XCTestCase {
         XCTAssertTrue(repositoryListTableView.exists, "The repository list tableview exists.")
         let repositoryCells = repositoryListTableView.cells
         XCTAssertTrue(repositoryCells.firstMatch.waitForExistence(timeout: 10))
-        
-
         
         if repositoryCells.count > 0 {
             let count: Int = (repositoryCells.count - 1)

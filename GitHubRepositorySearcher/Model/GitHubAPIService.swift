@@ -30,6 +30,7 @@ class GitHubAPIService {
         }
     }
     
+    
     static func fetchRepository(for text: String) async throws -> [Repository] {
         
         guard let urlString = "https://api.github.com/search/repositories?q=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), let url = URL(string: urlString)  else {
