@@ -22,9 +22,9 @@
 
 ### 環境
 
-- IDE：Xcode 14.0
+- IDE：Xcode 14.1
 - Swift：Swift 5.7
-- 開発ターゲット：iOS 15.0
+- 開発ターゲット：iOS 16.0
 - サードパーティーライブラリーの利用：[OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs)、[SDWebImage](https://github.com/SDWebImage/SDWebImage)
 
 
